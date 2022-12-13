@@ -20,6 +20,10 @@ namespace Exceptions
         public object GetFirst()
         {
             // TODO ensure objects can only be retrieve if the item is queue is not empty
+            if (Count == 0)
+            {
+                throw new EmptyQueueException("err");
+            }
             var first = _items[_firstIndex % Capacity];
             _firstIndex++;
             return first;
@@ -27,6 +31,10 @@ namespace Exceptions
         
         public void AddLast(object item)
         {
+            if (Count == Capacity)
+            {
+                throw new FullQueueException("err2");
+            }
             // TODO ensure objects can only be inserted if the item is queue is not full
             _items[_lastIndex % Capacity] = item;
             _lastIndex++;
